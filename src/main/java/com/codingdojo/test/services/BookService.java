@@ -19,9 +19,14 @@ public class BookService {
 	public List<Book> allBooks(){
 		return bookRepo.findAll();
 	}
-	
+
+	// get books that are not borrowed by the user
+	public List<Book> getAvailableBooks(Long id) {
+		return bookRepo.findByBorrowersIdNot(id);
+	}
+
+
 	// Find One By ID
-	
 	public Book getByID(Long id) {
 		return this.bookRepo.findById(id).orElse(null);
 	}

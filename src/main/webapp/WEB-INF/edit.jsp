@@ -46,6 +46,7 @@
 			</c:if>
 
 			<form:hidden path="user" value="${user.id}" />
+			<form:hidden path="borrower" value="${book.borrower.id}" />
 			<div class="mb-3">
 				<form:label path="title" class="form-label">Title:</form:label>
 

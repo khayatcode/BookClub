@@ -43,6 +43,7 @@ public class BookController {
 		model.addAttribute("user", thisUser);
 
 		model.addAttribute("books", this.bookService.allBooks());
+		model.addAttribute("borrowedBooks", thisUser.getBorrowedBooks());
 
 		return "home.jsp";
 	}
@@ -123,6 +124,24 @@ public class BookController {
 		bookService.deleteBook(id);
 		return "redirect:/books/home";
 	}
+
+	@GetMapping("/{id}/borrow")
+	public String borrowBook(@PathVariable("id") Long id, HttpSession session) {
+		Book book = bookService.getByID(id);
+		User user = userService.getByID((Long) session.getAttribute("userID"));
+		book.setBorrower(user);
+		bookService.createOrUpdate(book);
+		return "redirect:/books/home";
+	}
+
+	@GetMapping("/{id}/unborrow")
+	public String unBorrowBook(@PathVariable("id") Long id) {
+		Book book = bookService.getByID(id);
+		book.setBorrower(null);
+		bookService.createOrUpdate(book);
+		return "redirect:/books/home";
+	}
+
 	
 
 }

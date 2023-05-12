@@ -61,6 +61,9 @@ public class User {
     
     @OneToMany(mappedBy="user", fetch=FetchType.LAZY)
     private List<Book> books;
+    
+    @OneToMany(mappedBy="borrower", fetch=FetchType.LAZY)
+    private List<Book> borrowedBooks;
   
     public User() {}
 
@@ -116,5 +119,18 @@ public class User {
 	public Date getUpdatedAt() {
 		return updatedAt;
 	}
+	public List<Book> getBooks() {
+		return books;
+	}
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
+	public List<Book> getBorrowedBooks() {
+		return borrowedBooks;
+	}
+	public void setBorrowedBooks(List<Book> borrowedBooks) {
+		this.borrowedBooks = borrowedBooks;
+	}
+	
 
 }
